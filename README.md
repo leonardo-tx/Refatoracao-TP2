@@ -31,3 +31,8 @@ strategies criados foram: AfricanParrotActions,
 EuropeanParrotActions e NorwegianBlueParrotActions.
 - ParrotActionsFactory: Responsável por criar um
 ParrotActions baseado no enum de ParrotTypeEnum.
+
+### Adição de verificações de atributos em ParrotDetails
+Como o número de cocos não pode ser negativo e nem a 
+voltagem, faz sentido adicionar uma verificação no
+construtor da classe, para evitar valores inválidos.

@@ -3,6 +3,7 @@ package parrot;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParrotTest {
     @Test
@@ -67,5 +68,23 @@ public class ParrotTest {
     public void getCryOfNorwegianBlueNoVoltage() {
         Parrot parrot = new Parrot(ParrotTypeEnum.NORWEGIAN_BLUE, new ParrotDetails(0, 0, false));
         assertEquals("...", parrot.getCry());
+    }
+
+    @Test
+    public void constructParrotDetailsWithNegativeVoltage() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new ParrotDetails(0, -1, false)
+        );
+        assertEquals("The voltage cannot be negative.", exception.getMessage());
+    }
+
+    @Test
+    public void constructParrotDetailsWithNegativeCoconuts() {
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new ParrotDetails(-2, 0, false)
+        );
+        assertEquals("The number of coconuts cannot be negative.", exception.getMessage());
     }
 }
