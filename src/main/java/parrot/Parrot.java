@@ -1,24 +1,19 @@
 package parrot;
 
 public class Parrot {
-
     private final ParrotTypeEnum type;
-    private final int numberOfCoconuts;
-    private final double voltage;
-    private final boolean isNailed;
+    private final ParrotDetails parrotDetails;
 
-    public Parrot(ParrotTypeEnum type, int numberOfCoconuts, double voltage, boolean isNailed) {
+    public Parrot(ParrotTypeEnum type, ParrotDetails parrotDetails) {
         this.type = type;
-        this.numberOfCoconuts = numberOfCoconuts;
-        this.voltage = voltage;
-        this.isNailed = isNailed;
+        this.parrotDetails = parrotDetails;
     }
 
     public double getSpeed() {
         return switch (type) {
             case EUROPEAN -> getBaseSpeed();
-            case AFRICAN -> Math.max(0, getBaseSpeed() - getLoadFactor() * numberOfCoconuts);
-            case NORWEGIAN_BLUE -> (isNailed) ? 0 : getBaseSpeed(voltage);
+            case AFRICAN -> Math.max(0, getBaseSpeed() - getLoadFactor() * parrotDetails.getNumberOfCoconuts());
+            case NORWEGIAN_BLUE -> (parrotDetails.isNailed()) ? 0 : getBaseSpeed(parrotDetails.getVoltage());
         };
     }
 
@@ -38,7 +33,7 @@ public class Parrot {
         return switch (type) {
             case EUROPEAN -> "Sqoork!";
             case AFRICAN -> "Sqaark!";
-            case NORWEGIAN_BLUE -> voltage > 0 ? "Bzzzzzz" : "...";
+            case NORWEGIAN_BLUE -> parrotDetails.getVoltage() > 0 ? "Bzzzzzz" : "...";
         };
     }
 }
